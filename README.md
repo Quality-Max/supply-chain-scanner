@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo.png" alt="QualityMax" height="60" />
-</p>
-
 # Supply Chain Security Scanner for Python
 
 [![GitHub stars](https://img.shields.io/github/stars/Quality-Max/supply-chain-scanner)](https://github.com/Quality-Max/supply-chain-scanner)
