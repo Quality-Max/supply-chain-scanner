@@ -30,13 +30,13 @@ A pytest-based security scanner that detects supply chain attack vectors in your
 
 ```bash
 pip install supply-chain-scanner
-pytest --pyargs supply_chain_scanner -v
+python -m pytest --pyargs supply_chain_scanner -v
 ```
 
 To scan a specific requirements.txt:
 
 ```bash
-pytest --pyargs supply_chain_scanner -v --requirements /path/to/requirements.txt
+python -m pytest --pyargs supply_chain_scanner -v --requirements /path/to/requirements.txt
 ```
 
 By default, the scanner auto-detects `requirements.txt` by searching upward from your current working directory.
@@ -58,7 +58,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install supply-chain-scanner
-      - run: pytest --pyargs supply_chain_scanner -v
+      - run: python -m pytest --pyargs supply_chain_scanner -v
 ```
 
 ## Built by QualityMax
