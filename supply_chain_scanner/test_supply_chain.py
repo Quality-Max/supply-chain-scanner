@@ -328,6 +328,7 @@ class TestPthFileInjection:
             "_virtualenv.pth",  # virtualenv
             "a1_coverage.pth",  # coverage.py -- process startup for test coverage
             "coverage.pth",  # coverage.py -- alternative name
+            "pytest-cov.pth",  # pytest-cov -- subprocess coverage via startup hook
         }
 
         for pth_file in pth_files:
@@ -651,6 +652,7 @@ class TestEnvironmentIntegrity:
             "virtualenv.pth",
             "a1_coverage.pth",
             "coverage.pth",
+            "pytest-cov.pth",
         }
 
         for pth_file in pth_files:
