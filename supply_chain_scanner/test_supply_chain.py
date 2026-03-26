@@ -25,6 +25,7 @@ import importlib.metadata
 import re
 import site
 import sys
+import warnings
 import zlib
 from pathlib import Path
 
@@ -334,7 +335,8 @@ class TestPthFileInjection:
         for pth_file in pth_files:
             try:
                 content = pth_file.read_text(errors="replace")
-            except (OSError, PermissionError):
+            except (OSError, PermissionError) as exc:
+                warnings.warn(f"Could not read {pth_file}: {exc}", stacklevel=1)
                 continue
 
             issues = []
@@ -388,7 +390,8 @@ class TestPthFileInjection:
         for pth_file in pth_files:
             try:
                 content = pth_file.read_text(errors="replace")
-            except (OSError, PermissionError):
+            except (OSError, PermissionError) as exc:
+                warnings.warn(f"Could not read {pth_file}: {exc}", stacklevel=1)
                 continue
 
             for line_num, line in enumerate(content.splitlines(), 1):
@@ -429,7 +432,8 @@ class TestEncodedPayloads:
 
                 try:
                     content = py_file.read_text(errors="replace")
-                except (OSError, PermissionError):
+                except (OSError, PermissionError) as exc:
+                    warnings.warn(f"Could not read {py_file}: {exc}", stacklevel=1)
                     continue
 
                 # Scan for encoded strings (base64, hex)
@@ -465,7 +469,8 @@ class TestEncodedPayloads:
 
                 try:
                     content = py_file.read_text(errors="replace")
-                except (OSError, PermissionError):
+                except (OSError, PermissionError) as exc:
+                    warnings.warn(f"Could not read {py_file}: {exc}", stacklevel=1)
                     continue
 
                 for pattern in OBFUSCATION_PATTERNS:
@@ -563,7 +568,8 @@ class TestInstallHooks:
                             for pattern in SUSPICIOUS_PATTERNS:
                                 if pattern.search(content):
                                     suspicious.append(f"{egg_info.name}/{script.name}: {pattern.pattern}")
-                        except (OSError, PermissionError):
+                        except (OSError, PermissionError) as exc:
+                            warnings.warn(f"Could not read {script}: {exc}", stacklevel=1)
                             continue
 
         assert not suspicious, f"Packages with suspicious install scripts: {suspicious}"
@@ -586,7 +592,8 @@ class TestInstallHooks:
                     for pattern in network_patterns:
                         if pattern.search(content):
                             suspicious.append(f"{setup_py.parent.name}/setup.py: {pattern.pattern}")
-                except (OSError, PermissionError):
+                except (OSError, PermissionError) as exc:
+                    warnings.warn(f"Could not read {setup_py}: {exc}", stacklevel=1)
                     continue
 
         assert not suspicious, f"Packages with setup.py making network calls: {suspicious}"
@@ -635,8 +642,8 @@ class TestEnvironmentIntegrity:
                     content = Path(pth_path).read_text(errors="replace")
                     if any(pattern.search(content) for pattern in SUSPICIOUS_PATTERNS):
                         risky.append(pth_path)
-                except (OSError, PermissionError):
-                    pass
+                except (OSError, PermissionError) as exc:
+                    warnings.warn(f"Could not read {pth_path}: {exc}", stacklevel=1)
 
             assert not risky, f"CRITICAL: Unexpected .pth files with suspicious content: {risky}"
 
@@ -660,7 +667,8 @@ class TestEnvironmentIntegrity:
 
             try:
                 content = pth_file.read_text(errors="replace")
-            except (OSError, PermissionError):
+            except (OSError, PermissionError) as exc:
+                warnings.warn(f"Could not read {pth_file}: {exc}", stacklevel=1)
                 continue
 
             for target in SENSITIVE_EXFIL_TARGETS:
