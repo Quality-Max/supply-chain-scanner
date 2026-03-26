@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+supply_chain_scanner/__init__.py
+supply_chain_scanner/conftest.py
+supply_chain_scanner/test_supply_chain.py
+supply_chain_scanner.egg-info/PKG-INFO
+supply_chain_scanner.egg-info/SOURCES.txt
+supply_chain_scanner.egg-info/dependency_links.txt
+supply_chain_scanner.egg-info/requires.txt
+supply_chain_scanner.egg-info/top_level.txt

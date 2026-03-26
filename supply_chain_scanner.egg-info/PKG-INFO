@@ -1,12 +1,34 @@
-<p align="center">
-  <img src="assets/logo.png" alt="QualityMax" height="60" />
-</p>
+Metadata-Version: 2.4
+Name: supply-chain-scanner
+Version: 0.1.0
+Summary: Supply chain security scanner for Python dependencies — detects compromised packages, typosquatting, malicious .pth files, and encoded payloads
+Author-email: QualityMax <hello@qualitymax.io>
+License-Expression: Apache-2.0
+Project-URL: Homepage, https://github.com/Quality-Max/supply-chain-scanner
+Project-URL: Documentation, https://github.com/Quality-Max/supply-chain-scanner#readme
+Project-URL: Repository, https://github.com/Quality-Max/supply-chain-scanner
+Project-URL: Issues, https://github.com/Quality-Max/supply-chain-scanner/issues
+Keywords: security,supply-chain,pytest,dependencies,pypi
+Classifier: Development Status :: 4 - Beta
+Classifier: Framework :: Pytest
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pytest>=7.0
+Dynamic: license-file
 
 # Supply Chain Security Scanner for Python
 
 [![GitHub stars](https://img.shields.io/github/stars/Quality-Max/supply-chain-scanner)](https://github.com/Quality-Max/supply-chain-scanner)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CI](https://github.com/Quality-Max/supply-chain-scanner/actions/workflows/scan.yml/badge.svg)](https://github.com/Quality-Max/supply-chain-scanner/actions)
 
 A pytest-based security scanner that detects supply chain attack vectors in your Python dependencies. Inspired by the [litellm PyPI supply chain attack](https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/) (March 2026), where a poisoned release used a `.pth` file with base64-encoded instructions to exfiltrate SSH keys, cloud credentials, environment variables, and crypto wallets from every machine that installed it.
 
