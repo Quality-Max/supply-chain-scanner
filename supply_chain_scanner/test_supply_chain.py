@@ -19,6 +19,7 @@ Reference: https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/
 """
 
 import base64
+import binascii
 import codecs
 import importlib.metadata
 import re
@@ -133,7 +134,7 @@ def _try_decode_payload(encoded: str) -> list[str]:
         decoded = base64.b64decode(encoded).decode("utf-8", errors="replace")
         if any(kw in decoded.lower() for kw in suspicious_keywords):
             results.append(f"base64: {decoded[:120]}")
-    except Exception:
+    except (binascii.Error, ValueError, UnicodeDecodeError):
         pass
 
     # Hex
@@ -141,7 +142,7 @@ def _try_decode_payload(encoded: str) -> list[str]:
         decoded = bytes.fromhex(encoded).decode("utf-8", errors="replace")
         if any(kw in decoded.lower() for kw in suspicious_keywords):
             results.append(f"hex: {decoded[:120]}")
-    except Exception:
+    except (ValueError, UnicodeDecodeError):
         pass
 
     # Zlib + base64 (compressed payload)
@@ -150,7 +151,7 @@ def _try_decode_payload(encoded: str) -> list[str]:
         decoded = zlib.decompress(raw).decode("utf-8", errors="replace")
         if any(kw in decoded.lower() for kw in suspicious_keywords):
             results.append(f"zlib+base64: {decoded[:120]}")
-    except Exception:
+    except (binascii.Error, zlib.error, ValueError, UnicodeDecodeError):
         pass
 
     # ROT13
@@ -158,7 +159,7 @@ def _try_decode_payload(encoded: str) -> list[str]:
         decoded = codecs.decode(encoded, "rot_13")
         if any(kw in decoded.lower() for kw in suspicious_keywords):
             results.append(f"rot13: {decoded[:120]}")
-    except Exception:
+    except (ValueError, LookupError):
         pass
 
     return results
@@ -350,7 +351,7 @@ class TestPthFileInjection:
                         for kw in ["exec", "eval", "import", "subprocess", "socket", "http", "requests", "urllib"]
                     ):
                         issues.append(f"base64 payload decodes to executable code: {decoded[:100]}...")
-                except Exception:
+                except (binascii.Error, ValueError, UnicodeDecodeError):
                     pass
 
             # Check for executable import lines (skip known-safe system .pth files)
@@ -445,7 +446,7 @@ class TestEncodedPayloads:
                         exfil_hits = [t for t in SENSITIVE_EXFIL_TARGETS if t in decoded]
                         if exfil_hits:
                             suspicious_packages.append(f"{pkg_name}: payload references {exfil_hits}")
-                    except Exception:
+                    except (binascii.Error, ValueError, UnicodeDecodeError):
                         pass
 
         assert not suspicious_packages, "CRITICAL: Packages with encoded exfiltration payloads:\n" + "\n".join(
