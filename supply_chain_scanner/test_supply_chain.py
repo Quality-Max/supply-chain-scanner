@@ -208,10 +208,12 @@ def _find_requirements_file(request) -> Path | None:
     # Check for --requirements CLI arg
     req_path = request.config.getoption("--requirements", default=None)
     if req_path:
-        p = Path(req_path)
-        if p.exists():
-            return p
-        return None
+        p = Path(req_path).resolve()
+        if not p.is_file():
+            return None
+        if not p.suffix and not p.name.startswith("requirements"):
+            return None
+        return p
 
     # Walk up from CWD to find requirements.txt
     current = Path.cwd()
