@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "supply-chain-scanner"
+version = "0.1.0"
+description = "Supply chain security scanner for Python dependencies — detects compromised packages, typosquatting, malicious .pth files, and encoded payloads"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "QualityMax", email = "hello@qualitymax.io" },
+]
+keywords = ["security", "supply-chain", "pytest", "dependencies", "pypi"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "pytest>=7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Quality-Max/supply-chain-scanner"
+Documentation = "https://github.com/Quality-Max/supply-chain-scanner#readme"
+Repository = "https://github.com/Quality-Max/supply-chain-scanner"
+Issues = "https://github.com/Quality-Max/supply-chain-scanner/issues"
+
+[tool.setuptools.packages.find]
+include = ["supply_chain_scanner*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "security: supply chain security tests",
+]
