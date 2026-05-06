@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://github.com/Quality-Max/supply-chain-scanner/actions/workflows/scan.yml/badge.svg)](https://github.com/Quality-Max/supply-chain-scanner/actions)
 
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/qualitymax)
+
 A pytest-based security scanner that detects supply chain attack vectors in your Python dependencies. Inspired by the [litellm PyPI supply chain attack](https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/) (March 2026), where a poisoned release used a `.pth` file with base64-encoded instructions to exfiltrate SSH keys, cloud credentials, environment variables, and crypto wallets from every machine that installed it.
 
 ## What It Catches
