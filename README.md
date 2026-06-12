@@ -64,6 +64,14 @@ jobs:
       - run: python -m pytest --pyargs supply_chain_scanner -v
 ```
 
+## Security & contributing
+
+- Report a vulnerability or a detection gap: see [SECURITY.md](SECURITY.md).
+- Add or improve a detection: see [CONTRIBUTING.md](CONTRIBUTING.md) (`python -m pytest --pyargs supply_chain_scanner -v`).
+- Community standards: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+CI runs the full scanner on every push/PR with least-privilege permissions and SHA-pinned actions; Dependabot keeps dependencies and actions patched.
+
 ## Built by QualityMax
 
 This scanner is maintained by [QualityMax](https://qualitymax.io) -- the AI-native test automation platform.
