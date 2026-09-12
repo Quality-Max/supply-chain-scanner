@@ -1,5 +1,9 @@
 # Supply Chain Security Scanner for Python
 
+[Standalone tools](https://docs.qualitymax.io/free-and-open-source/) · [QualityMax ecosystem](https://github.com/Quality-Max/qualitymax)
+
+Interpret findings against the scanner's documented inputs and rules. A clean scan does not establish that every dependency or runtime behavior is safe.
+
 [![GitHub stars](https://img.shields.io/github/stars/Quality-Max/supply-chain-scanner)](https://github.com/Quality-Max/supply-chain-scanner)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://github.com/Quality-Max/supply-chain-scanner/actions/workflows/scan.yml/badge.svg)](https://github.com/Quality-Max/supply-chain-scanner/actions)
